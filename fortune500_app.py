@@ -64,7 +64,7 @@ st.markdown(f"""
 }}
 
 .stButton > button {{
-    background: linear-gradient(135deg, #00CED1 0%, #1E90FF 100%) !important;
+    background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%) !important;
     color: white !important;
     border: none !important;
     border-radius: 12px !important;
@@ -77,8 +77,8 @@ st.markdown(f"""
 
 .stButton > button:hover {{
     transform: translateY(-3px) !important;
-    box-shadow: 0 8px 20px rgba(0, 206, 209, 0.4) !important;
-    background: linear-gradient(135deg, #1E90FF 0%, #00CED1 100%) !important;
+    box-shadow: 0 8px 20px rgba(74, 85, 104, 0.4) !important;
+    background: linear-gradient(135deg, #2D3748 0%, #1A202C 100%) !important;
 }}
 
 .stTabs [data-baseweb="tab-list"] {{
@@ -100,10 +100,10 @@ st.markdown(f"""
 }}
 
 .stTabs [aria-selected="true"] {{
-    background: linear-gradient(135deg, #00CED1 0%, #1E90FF 100%) !important;
+    background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%) !important;
     color: white !important;
     border: none;
-    box-shadow: 0 4px 12px rgba(0, 206, 209, 0.3);
+    box-shadow: 0 4px 12px rgba(74, 85, 104, 0.3);
 }}
 
 .stSelectbox, .stDropdown {{
@@ -181,7 +181,7 @@ h1, h2, h3, h4, h5, h6 {{
 }}
 
 .stDataFrame th {{
-    background: rgba(0, 206, 209, 0.3) !important;
+    background: rgba(74, 85, 104, 0.3) !important;
     color: white !important;
     font-weight: 600 !important;
 }}
@@ -206,7 +206,7 @@ h1, h2, h3, h4, h5, h6 {{
 }}
 
 .developer {{
-    background: linear-gradient(135deg, rgba(0, 206, 209, 0.2) 0%, rgba(30, 144, 255, 0.2) 100%) !important;
+    background: linear-gradient(135deg, rgba(160, 174, 192, 0.2) 0%, rgba(113, 128, 150, 0.2) 100%) !important;
     backdrop-filter: blur(10px) !important;
     padding: 20px !important;
     border-radius: 16px !important;
@@ -236,7 +236,7 @@ h1, h2, h3, h4, h5, h6 {{
 hr {{
     border: none !important;
     height: 2px !important;
-    background: linear-gradient(90deg, transparent, rgba(0,206,209,0.5), transparent) !important;
+    background: linear-gradient(90deg, transparent, rgba(160, 174, 192, 0.5), transparent) !important;
     margin: 30px 0 !important;
 }}
 
@@ -252,17 +252,17 @@ hr {{
 }}
 
 div[data-testid="stMetric"]:nth-of-type(1) {{
-    background: linear-gradient(135deg, rgba(0, 206, 209, 0.3) 0%, rgba(30, 144, 255, 0.3) 100%) !important;
-    border: 1px solid rgba(0, 206, 209, 0.5) !important;
+    background: linear-gradient(135deg, rgba(160, 174, 192, 0.3) 0%, rgba(113, 128, 150, 0.3) 100%) !important;
+    border: 1px solid rgba(160, 174, 192, 0.5) !important;
 }}
 
 div[data-testid="stMetric"]:nth-of-type(1) label {{
-    color: #E0FFFF !important;
+    color: #E2E8F0 !important;
 }}
 
 div[data-testid="stMetric"]:nth-of-type(1) div {{
-    color: #00CED1 !important;
-    text-shadow: 1px 1px 3px rgba(0,206,209,0.3) !important;
+    color: #CBD5E0 !important;
+    text-shadow: 1px 1px 3px rgba(160,174,192,0.3) !important;
 }}
 </style>
 """, unsafe_allow_html=True)
@@ -307,22 +307,24 @@ if df.empty:
 df['profit_margin'] = (df['profit_mil'] / df['revenue_mil']) * 100
 
 colors = {
-    'primary': '#00CED1',
-    'secondary': '#1E90FF',
-    'accent1': '#10B981',
-    'accent2': '#F59E0B',
-    'accent3': '#EF4444',
-    'success': '#10B981',
-    'danger': '#EF4444',
-    'warning': '#F59E0B',
-    'info': '#1E90FF',
-    'cyan': '#00CED1',
-    'dodgerblue': '#1E90FF',
-    'lightcyan': '#E0FFFF'
+    'primary': '#4A5568',
+    'secondary': '#2D3748',
+    'accent1': '#A0AEC0',
+    'accent2': '#718096',
+    'accent3': '#4A5568',
+    'success': '#48BB78',
+    'danger': '#F56565',
+    'warning': '#ECC94B',
+    'info': '#A0AEC0',
+    'light': '#F7FAFC',
+    'dark': '#1A202C',
+    'gray1': '#CBD5E0',
+    'gray2': '#E2E8F0',
+    'gray3': '#EDF2F7'
 }
 
 st.markdown(f"""
-<div style="background: linear-gradient(135deg, rgba(0, 206, 209, 0.9) 0%, rgba(30, 144, 255, 0.9) 100%);
+<div style="background: linear-gradient(135deg, rgba(45, 55, 72, 0.95) 0%, rgba(26, 32, 44, 0.95) 100%);
             backdrop-filter: blur(12px);
             padding: 40px; 
             border-radius: 25px; 
@@ -336,12 +338,12 @@ st.markdown(f"""
     <p style="color: rgba(255,255,255,0.95); margin-top: 15px; font-size: 1.4rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
         {_('1996-2024 Analysis & Predictions', 'تحليل وتوقعات 1996-2024')}
     </p>
-    <div style="background: rgba(255,255,255,0.15); 
+    <div style="background: rgba(160, 174, 192, 0.2); 
                 backdrop-filter: blur(8px);
                 padding: 15px; 
                 border-radius: 15px; 
                 margin-top: 25px; 
-                border: 1px solid rgba(255,255,255,0.25);
+                border: 1px solid rgba(160, 174, 192, 0.5);
                 max-width: 400px;
                 margin-left: auto;
                 margin-right: auto;">
@@ -354,7 +356,7 @@ st.markdown(f"""
 
 with st.sidebar:
     st.markdown(f"""
-    <div style="background: linear-gradient(135deg, rgba(0, 206, 209, 0.25) 0%, rgba(30, 144, 255, 0.25) 100%);
+    <div style="background: linear-gradient(135deg, rgba(45, 55, 72, 0.25) 0%, rgba(26, 32, 44, 0.25) 100%);
                 backdrop-filter: blur(12px);
                 padding: 25px; 
                 border-radius: 20px; 
@@ -367,7 +369,7 @@ with st.sidebar:
             {_('Developer: Mohammad Naser', 'المطور: محمد زكريا ناصر')}
         </p>
         <p style="color: rgba(255,255,255,0.7); margin-bottom: 0; font-size: 0.9rem;">
-            {_('Data Analyst', 'محلل بيانات')}
+            {_('Data Scientist', 'عالم بيانات')}
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -407,7 +409,7 @@ if menu == _("Year Analysis", "تحليل السنوات"):
             top = df_year.nlargest(top_n, 'revenue_mil')
             fig = px.bar(top, x='revenue_mil', y='name', orientation='h',
                         title=f"{_('Top', 'أفضل')} {top_n} {_('Companies', 'شركة')} - {year}",
-                        color='revenue_mil', color_continuous_scale='viridis')
+                        color='revenue_mil', color_continuous_scale='gray')
             fig.update_layout(height=500, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                             font=dict(color='white', size=12), title_font_color='white')
             st.plotly_chart(fig, use_container_width=True)
@@ -422,13 +424,15 @@ if menu == _("Year Analysis", "تحليل السنوات"):
             col1, col2 = st.columns(2)
             with col1:
                 fig1 = px.bar(ind.reset_index(), x='revenue_mil', y='industry', orientation='h',
-                            title=_("Revenue by Industry", "الإيرادات حسب الصناعة"))
+                            title=_("Revenue by Industry", "الإيرادات حسب الصناعة"),
+                            color='revenue_mil', color_continuous_scale='gray')
                 fig1.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                                  height=500, font=dict(color='white'), title_font_color='white')
                 st.plotly_chart(fig1, use_container_width=True)
             with col2:
                 fig2 = px.bar(ind.reset_index(), x='profit_margin', y='industry', orientation='h',
-                            title=_("Margin by Industry", "الهامش حسب الصناعة"))
+                            title=_("Margin by Industry", "الهامش حسب الصناعة"),
+                            color='profit_margin', color_continuous_scale='gray')
                 fig2.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                                  height=500, font=dict(color='white'), title_font_color='white')
                 st.plotly_chart(fig2, use_container_width=True)
@@ -453,11 +457,13 @@ elif menu == _("Company Analysis", "تحليل الشركات"):
         col1, col2 = st.columns(2)
         with col1:
             fig1 = px.line(df_comp, x='year', y='revenue_mil', title=_("Revenue Trend", "اتجاه الإيرادات"), markers=True)
+            fig1.update_traces(line=dict(color='#A0AEC0', width=3), marker=dict(color='#A0AEC0', size=8))
             fig1.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                              height=400, font=dict(color='white'), title_font_color='white')
             st.plotly_chart(fig1, use_container_width=True)
         with col2:
             fig2 = px.line(df_comp, x='year', y='rank', title=_("Rank Trend", "اتجاه الترتيب"), markers=True)
+            fig2.update_traces(line=dict(color='#718096', width=3), marker=dict(color='#718096', size=8))
             fig2.update_yaxes(autorange="reversed")
             fig2.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                              height=400, font=dict(color='white'), title_font_color='white')
@@ -496,10 +502,10 @@ elif menu == _("Year Comparison", "مقارنة السنوات"):
         fig = go.Figure()
         fig.add_trace(go.Bar(name=_("Total Revenue", "إجمالي الإيرادات"), 
                             x=comp[_("Year", "السنة")], y=comp[_("Total Revenue", "إجمالي الإيرادات")],
-                            marker_color='#00CED1'))
+                            marker_color='#A0AEC0'))
         fig.add_trace(go.Bar(name=_("Avg Revenue", "متوسط الإيرادات"), 
                             x=comp[_("Year", "السنة")], y=comp[_("Avg Revenue", "متوسط الإيرادات")],
-                            marker_color='#1E90FF'))
+                            marker_color='#718096'))
         fig.update_layout(barmode='group', height=400, 
                          plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                          font=dict(color='white', size=12), title_font_color='white',
@@ -543,7 +549,7 @@ elif menu == _("Predictions & Models", "التوقعات والنماذج"):
             df_pred_sorted = df_pred.sort_values(revenue_col, ascending=False).head(20)
             fig = px.bar(df_pred_sorted, x=revenue_col, y=name_col, orientation='h',
                         title=_("Top 20 Predicted Companies 2024", "أفضل 20 شركة متوقعة 2024"),
-                        color=revenue_col, color_continuous_scale='viridis')
+                        color=revenue_col, color_continuous_scale='gray')
             fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                             height=500, font=dict(color='white'), title_font_color='white')
             st.plotly_chart(fig, use_container_width=True)
@@ -573,7 +579,7 @@ elif menu == _("Predictions & Models", "التوقعات والنماذج"):
             if model_col:
                 fig = px.bar(df_models, x=model_col, y=accuracy_col, 
                            title=_("Model Accuracy", "دقة النماذج"),
-                           color=accuracy_col, color_continuous_scale='rdylgn')
+                           color=accuracy_col, color_continuous_scale='gray')
                 fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                                 height=400, xaxis_tickangle=45, font=dict(color='white'), 
                                 title_font_color='white')
@@ -581,7 +587,7 @@ elif menu == _("Predictions & Models", "التوقعات والنماذج"):
             else:
                 fig = px.bar(df_models, y=accuracy_col, 
                            title=_("Model Accuracy", "دقة النماذج"),
-                           color=accuracy_col, color_continuous_scale='rdylgn')
+                           color=accuracy_col, color_continuous_scale='gray')
                 fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                                 height=400, font=dict(color='white'), title_font_color='white')
                 st.plotly_chart(fig, use_container_width=True)
@@ -606,6 +612,7 @@ elif menu == _("Predictions & Models", "التوقعات والنماذج"):
             fig = px.scatter(df_test.head(100), x=actual_col, y=predicted_col,
                            title=_("Actual vs Predicted", "الفعلية مقابل المتوقعة"),
                            labels={actual_col: _("Actual", "فعلية"), predicted_col: _("Predicted", "متوقعة")})
+            fig.update_traces(marker=dict(color='#A0AEC0', size=5))
             fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                             height=500, font=dict(color='white'), title_font_color='white')
             st.plotly_chart(fig, use_container_width=True)
@@ -637,11 +644,11 @@ else:
                        ))
     
     fig.add_trace(go.Scatter(x=yearly['year'], y=yearly['revenue_mil'], 
-                            name=_("Revenue","الإيرادات"), line=dict(color='#00CED1', width=3)), row=1, col=1)
+                            name=_("Revenue","الإيرادات"), line=dict(color='#A0AEC0', width=3)), row=1, col=1)
     fig.add_trace(go.Scatter(x=yearly['year'], y=yearly['profit_mil'], 
-                            name=_("Profit","الأرباح"), line=dict(color='#10B981', width=3)), row=2, col=1)
+                            name=_("Profit","الأرباح"), line=dict(color='#48BB78', width=3)), row=2, col=1)
     fig.add_trace(go.Scatter(x=yearly['year'], y=yearly['profit_margin'], 
-                            name=_("Margin","الهامش"), line=dict(color='#F59E0B', width=3)), row=3, col=1)
+                            name=_("Margin","الهامش"), line=dict(color='#ECC94B', width=3)), row=3, col=1)
     
     fig.update_layout(height=700, showlegend=True, 
                      plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
@@ -660,7 +667,7 @@ else:
     top = df.groupby('name')['revenue_mil'].max().nlargest(15)
     fig2 = px.bar(x=top.values, y=top.index, orientation='h',
                  title=_("Top 15 Companies All Time", "أفضل 15 شركة على الإطلاق"),
-                 color=top.values, color_continuous_scale='viridis')
+                 color=top.values, color_continuous_scale='gray')
     fig2.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                       height=500, font=dict(color='white', size=12), title_font_color='white')
     st.plotly_chart(fig2, use_container_width=True)
@@ -668,7 +675,7 @@ else:
     st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown(f"""
-<div style="background: linear-gradient(135deg, rgba(0,206,209,0.7) 0%, rgba(30,144,255,0.7) 100%);
+<div style="background: linear-gradient(135deg, rgba(45, 55, 72, 0.9) 0%, rgba(26, 32, 44, 0.9) 100%);
             backdrop-filter: blur(12px);
             border-radius: 20px;
             padding: 30px;
@@ -683,12 +690,12 @@ st.markdown(f"""
             {_('Developed by: Mohammad Naser', 'تم التطوير بواسطة: محمد زكريا ناصر')}
         </p>
         <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem;">
-            {_('Data Analyst', 'محلل بيانات')}
+            {_('Data Scientist', 'عالم بيانات')}
         </p>
     </div>
     <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 15px; flex-wrap: wrap;">
         <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem;">
-                                1996-2024
+            1996-2024
         </p>
         <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem;">
             {_('Powered by Streamlit & Plotly', 'بتقنية Streamlit و Plotly')}
