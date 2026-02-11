@@ -367,7 +367,7 @@ with st.sidebar:
             {_('Developer: Mohammad Naser', 'المطور: محمد زكريا ناصر')}
         </p>
         <p style="color: rgba(255,255,255,0.7); margin-bottom: 0; font-size: 0.9rem;">
-            {_('Data Scientist', 'عالم بيانات')}
+            {_('Data Analyst', 'محلل بيانات')}
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -688,7 +688,7 @@ st.markdown(f"""
     </div>
     <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 15px; flex-wrap: wrap;">
         <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem;">
-            1996-2024
+            {_('1996-2024')}
         </p>
         <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem;">
             {_('Powered by Streamlit & Plotly', 'بتقنية Streamlit و Plotly')}
