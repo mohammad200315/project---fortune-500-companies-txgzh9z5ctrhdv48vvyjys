@@ -9,6 +9,7 @@ warnings.filterwarnings('ignore')
 
 st.set_page_config(
     page_title="Fortune 500 Analytics Dashboard",
+    page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -373,7 +374,8 @@ else:
     st.plotly_chart(fig, use_container_width=True)
     top = df.groupby('name')['revenue_mil'].max().nlargest(15)
     fig2 = px.bar(x=top.values, y=top.index, orientation='h',
-                 title=_("Top 15 Companies All Time", "أفضل 15 شركة على الإطلاق"))
+                 title=_("Top 15 Companies All Time", "أفضل 15 شركة على الإطلاق"),
+                 color=top.values, color_continuous_scale='viridis')
     fig2.update_layout(plot_bgcolor='white', paper_bgcolor='white', height=500)
     st.plotly_chart(fig2, use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
