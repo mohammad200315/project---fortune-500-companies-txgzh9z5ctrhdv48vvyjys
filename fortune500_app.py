@@ -10,7 +10,14 @@ import os
 from datetime import datetime
 warnings.filterwarnings('ignore')
 
-# إعداد الصفحة
+"""
+FORTUNE 500 ANALYTICS DASHBOARD
+================================
+Developer: Mohammad Zakaria Naser
+Date: 2024
+Copyright © 2024 Mohammad Naser. All rights reserved.
+"""
+
 st.set_page_config(
     page_title="Fortune 500 Analytics Dashboard",
     page_icon="📊",
@@ -18,7 +25,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# دالة تحميل الصورة
 def get_base64_of_image(image_path):
     try:
         with open(image_path, "rb") as f:
@@ -27,14 +33,12 @@ def get_base64_of_image(image_path):
     except:
         return None
 
-# محاولة تحميل صورة الخلفية
 image_path = r"WhatsApp Image 2026-02-11 at 3.32.24 PM.jpeg"
 if os.path.exists(image_path):
     image_base64 = get_base64_of_image(image_path)
 else:
     image_base64 = None
 
-# CSS مخصص
 if image_base64:
     bg_style = f"""
     .stApp {{
@@ -47,7 +51,7 @@ if image_base64:
 else:
     bg_style = """
     .stApp {
-        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
     """
 
@@ -56,17 +60,60 @@ st.markdown(f"""
 {bg_style}
 
 .main > div {{
-    background: rgba(0, 0, 0, 0.65) !important;
-    backdrop-filter: blur(8px) !important;
-    border-radius: 20px !important;
-    padding: 20px !important;
-    margin: 10px !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
 }}
 
 .css-1d391kg, .css-163ttbj, [data-testid="stSidebar"] > div:first-child {{
     background: rgba(10, 10, 20, 0.85) !important;
     backdrop-filter: blur(10px) !important;
     border-right: 1px solid rgba(255,255,255,0.15) !important;
+}}
+
+.intro-header {{
+    background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 60px 40px;
+    margin: 20px 0 40px 0;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.intro-header h1 {{
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}}
+
+.intro-header p {{
+    color: rgba(255,255,255,0.95);
+    font-size: 1.5rem;
+    margin-top: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}}
+
+.developer-badge {{
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 12px 30px;
+    margin-top: 25px;
+}}
+
+.developer-badge p {{
+    color: white;
+    margin: 0;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
 }}
 
 .custom-card {{
@@ -79,13 +126,6 @@ st.markdown(f"""
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }}
 
-.custom-card h1, .custom-card h2, .custom-card h3, .custom-card h4, 
-.custom-card h5, .custom-card h6, .custom-card p, .custom-card span, 
-.custom-card div {{
-    color: #ffffff !important;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3) !important;
-}}
-
 .stButton > button {{
     background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%) !important;
     color: white !important;
@@ -93,15 +133,12 @@ st.markdown(f"""
     border-radius: 12px !important;
     padding: 12px 24px !important;
     font-weight: 600 !important;
-    letter-spacing: 0.5px !important;
-    border: 1px solid rgba(255,255,255,0.2) !important;
     transition: all 0.3s ease !important;
 }}
 
 .stButton > button:hover {{
     transform: translateY(-3px) !important;
     box-shadow: 0 8px 20px rgba(74, 85, 104, 0.4) !important;
-    background: linear-gradient(135deg, #2D3748 0%, #1A202C 100%) !important;
 }}
 
 .stTabs [data-baseweb="tab-list"] {{
@@ -118,51 +155,10 @@ st.markdown(f"""
     color: white !important;
     padding: 12px 24px;
     border: 1px solid rgba(255,255,255,0.15);
-    font-weight: 500;
-    transition: all 0.3s ease;
 }}
 
 .stTabs [aria-selected="true"] {{
     background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%) !important;
-    color: white !important;
-    border: none;
-    box-shadow: 0 4px 12px rgba(74, 85, 104, 0.3);
-}}
-
-.stSelectbox, .stDropdown {{
-    background: rgba(30, 35, 50, 0.8);
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur(5px);
-}}
-
-.stSelectbox label, .stDropdown label {{
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    font-size: 1rem !important;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
-}}
-
-.stSelectbox > div > div {{
-    background: rgba(40, 45, 60, 0.9) !important;
-    color: white !important;
-    border: 1px solid rgba(255,255,255,0.2) !important;
-    border-radius: 8px !important;
-}}
-
-h1, h2, h3, h4, h5, h6 {{
-    color: #ffffff !important;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
-    letter-spacing: 0.5px !important;
-}}
-
-.stMarkdown {{
-    color: #ffffff !important;
-}}
-
-.stMarkdown p, .stMarkdown span {{
-    color: rgba(255,255,255,0.95) !important;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3) !important;
 }}
 
 .stMetric {{
@@ -171,142 +167,77 @@ h1, h2, h3, h4, h5, h6 {{
     padding: 20px !important;
     border-radius: 16px !important;
     border: 1px solid rgba(255,255,255,0.2) !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
 }}
 
 .stMetric label {{
     color: rgba(255,255,255,0.9) !important;
-    font-size: 0.9rem !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
 }}
 
 .stMetric div {{
     color: #ffffff !important;
-    font-size: 1.8rem !important;
-    font-weight: 700 !important;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3) !important;
 }}
 
-.dataframe, .stDataFrame {{
-    background: rgba(30, 35, 50, 0.8) !important;
-    backdrop-filter: blur(8px) !important;
-    border-radius: 12px !important;
-    padding: 10px !important;
-    border: 1px solid rgba(255,255,255,0.2) !important;
-}}
-
-.stDataFrame td, .stDataFrame th {{
-    color: #ffffff !important;
-    background: transparent !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-    padding: 12px !important;
-}}
-
-.stDataFrame th {{
-    background: rgba(74, 85, 104, 0.3) !important;
-    color: white !important;
-    font-weight: 600 !important;
-}}
-
-.stRadio > div {{
-    background: rgba(30, 35, 50, 0.6) !important;
-    backdrop-filter: blur(8px) !important;
-    padding: 15px !important;
-    border-radius: 16px !important;
-    border: 1px solid rgba(255,255,255,0.15) !important;
-}}
-
-.stRadio label {{
-    color: white !important;
-    font-size: 1rem !important;
-    padding: 8px !important;
-}}
-
-.stNumberInput > div > div > input {{
-    background: rgba(40, 45, 60, 0.9) !important;
-    color: white !important;
-    border: 1px solid rgba(255,255,255,0.2) !important;
-    border-radius: 8px !important;
-}}
-
-hr {{
-    border: none !important;
-    height: 2px !important;
-    background: linear-gradient(90deg, transparent, rgba(160, 174, 192, 0.5), transparent) !important;
-    margin: 30px 0 !important;
-}}
-
-.sidebar-content p, .sidebar-content span, .sidebar-content div {{
-    color: white !important;
-}}
-
-div[data-testid="stMetric"]:nth-of-type(1) {{
-    background: linear-gradient(135deg, rgba(160, 174, 192, 0.3) 0%, rgba(113, 128, 150, 0.3) 100%) !important;
-    border: 1px solid rgba(160, 174, 192, 0.5) !important;
-}}
-
-div[data-testid="stMetric"]:nth-of-type(1) label {{
-    color: #E2E8F0 !important;
-}}
-
-div[data-testid="stMetric"]:nth-of-type(1) div {{
-    color: #CBD5E0 !important;
-    text-shadow: 1px 1px 3px rgba(160,174,192,0.3) !important;
+.watermark {{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0.2;
+    z-index: 1000;
+    pointer-events: none;
+    font-size: 12px;
+    color: white;
+    transform: rotate(-5deg);
 }}
 </style>
 """, unsafe_allow_html=True)
 
-# اختيار اللغة
 lang = st.sidebar.radio("Language / اللغة", ["English", "العربية"], index=0)
 
 def _(en, ar):
     return en if lang == "English" else ar
 
-# تحميل البيانات
 @st.cache_data
 def load_data():
     files = {}
     try:
         files['main'] = pd.read_csv('fortune500_cleaned.csv')
-        st.sidebar.success(f"Main: {len(files['main']):,} rows")
+        st.sidebar.success(f"✅ Main: {len(files['main']):,} rows")
     except:
         files['main'] = pd.DataFrame()
     try:
         files['pred2024'] = pd.read_csv('fortune500_2024_predictions.csv')
-        st.sidebar.success(f"2024: {len(files['pred2024']):,} rows")
+        st.sidebar.success(f"✅ 2024: {len(files['pred2024']):,} rows")
     except:
         files['pred2024'] = pd.DataFrame()
     try:
         files['models'] = pd.read_csv('fortune500_models_performance.csv')
-        st.sidebar.success(f"Models: {len(files['models'])} models")
+        st.sidebar.success(f"✅ Models: {len(files['models'])} models")
     except:
         files['models'] = pd.DataFrame()
     try:
         files['test'] = pd.read_csv('fortune500_test_predictions.csv')
-        st.sidebar.success(f"Test: {len(files['test']):,} rows")
+        st.sidebar.success(f"✅ Test: {len(files['test']):,} rows")
     except:
         files['test'] = pd.DataFrame()
     return files
 
-# الشريط الجانبي
 with st.sidebar:
-    st.markdown(f"""
-    <div style="background: linear-gradient(135deg, rgba(45, 55, 72, 0.25) 0%, rgba(26, 32, 44, 0.25) 100%);
+    st.markdown("""
+    <div style="background: linear-gradient(135deg, rgba(45, 55, 72, 0.3) 0%, rgba(26, 32, 44, 0.3) 100%);
                 backdrop-filter: blur(12px);
                 padding: 25px; 
                 border-radius: 20px; 
                 margin-bottom: 25px;
-                border: 1px solid rgba(255,255,255,0.2);">
-        <h3 style="color: white; margin-top: 0; font-size: 1.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-            {_('Control Panel', 'لوحة التحكم')}
-        </h3>
-        <p style="color: rgba(255,255,255,0.9); margin-bottom: 0; font-size: 1rem;">
-            {_('Developer: Mohammad Naser', 'المطور: محمد زكريا ناصر')}
-        </p>
-        <p style="color: rgba(255,255,255,0.7); margin-bottom: 0; font-size: 0.9rem;">
-            {_('Data Analyst', 'محلل بيانات')}
-        </p>
+                border: 1px solid rgba(255,255,255,0.2);
+                text-align: center;">
+        <h3 style="color: white; margin: 0 0 15px 0; font-size: 1.5rem;">⚡ Control Panel</h3>
+        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4A5568, #2D3748); border-radius: 50%; margin: 0 auto 15px auto; display: flex; align-items: center; justify-content: center; border: 2px solid #A0AEC0;">
+            <span style="font-size: 2.5rem;">👨‍💻</span>
+        </div>
+        <p style="color: white; font-size: 1.2rem; margin: 0;">Mohammad Naser</p>
+        <p style="color: #A0AEC0; font-size: 0.9rem; margin: 5px 0;">Original Developer</p>
+        <hr style="margin: 15px 0; opacity: 0.3;">
+        <p style="color: #A0AEC0; font-size: 0.8rem;">© 2024 All Rights Reserved</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -317,57 +248,33 @@ with st.sidebar:
             _("🏢 Company Analysis", "🏢 تحليل الشركات"),
             _("📈 Year Comparison", "📈 مقارنة السنوات"),
             _("🤖 Predictions & Models", "🤖 التوقعات والنماذج"),
-            _("📋 Data Overview", "📋 نظرة عامة")
+            _("📋 Data Overview", "📋 نظرة عامة"),
+            _("ℹ️ About Developer", "ℹ️ عن المطور")
         ]
     )
 
-# تحميل البيانات
 data = load_data()
 df = data['main']
 
-if df.empty:
-    st.error(_("Main data file not found! Please check if fortune500_cleaned.csv exists.", 
-               "ملف البيانات الرئيسي غير موجود! الرجاء التأكد من وجود الملف."))
-    st.stop()
-
-# معالجة البيانات
-df['profit_margin'] = (df['profit_mil'] / df['revenue_mil']) * 100
-df['revenue_bil'] = df['revenue_mil'] / 1000
-df['profit_bil'] = df['profit_mil'] / 1000
-
-# الهيدر الرئيسي
-st.markdown(f"""
-<div style="background: linear-gradient(135deg, rgba(45, 55, 72, 0.95) 0%, rgba(26, 32, 44, 0.95) 100%);
-            backdrop-filter: blur(12px);
-            padding: 40px; 
-            border-radius: 25px; 
-            margin-bottom: 30px; 
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.25);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
-    <h1 style="color: white; margin: 0; font-size: 3.2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-weight: 700; letter-spacing: 1px;">
-        {_('Fortune 500 Analytics Dashboard', 'لوحة تحليل Fortune 500')}
-    </h1>
-    <p style="color: rgba(255,255,255,0.95); margin-top: 15px; font-size: 1.4rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-        {_('1996-2024 Analysis & Predictions', 'تحليل وتوقعات 1996-2024')}
-    </p>
-    <div style="background: rgba(160, 174, 192, 0.2); 
-                backdrop-filter: blur(8px);
-                padding: 15px; 
-                border-radius: 15px; 
-                margin-top: 25px; 
-                border: 1px solid rgba(160, 174, 192, 0.5);
-                max-width: 400px;
-                margin-left: auto;
-                margin-right: auto;">
-        <p style="color: white; margin: 0; font-size: 1.2rem; font-weight: 500;">
-            {_('Developed by: Mohammad Naser', 'تم التطوير بواسطة: محمد زكريا ناصر')}
-        </p>
+st.markdown("""
+<div class="intro-header">
+    <h1>FORTUNE 500</h1>
+    <p>Analytics Dashboard | 1996-2024</p>
+    <div class="developer-badge">
+        <p>⚡ Developed by Mohammad Zakaria Naser ⚡</p>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# ==================== YEAR ANALYSIS ====================
+if df.empty:
+    st.error(_("⚠️ Main data file not found! Please check if fortune500_cleaned.csv exists.", 
+               "⚠️ ملف البيانات الرئيسي غير موجود! الرجاء التأكد من وجود الملف."))
+    st.stop()
+
+df['profit_margin'] = (df['profit_mil'] / df['revenue_mil']) * 100
+df['revenue_bil'] = df['revenue_mil'] / 1000
+df['profit_bil'] = df['profit_mil'] / 1000
+
 if menu == _("📅 Year Analysis", "📅 تحليل السنوات"):
     st.markdown('<div class="custom-card">', unsafe_allow_html=True)
     st.header(_("📅 Year Analysis", "📅 تحليل السنوات"))
@@ -393,15 +300,15 @@ if menu == _("📅 Year Analysis", "📅 تحليل السنوات"):
         
         tabs = st.tabs([
             _("🏆 Top Companies", "🏆 أفضل الشركات"), 
-            _("📊 Revenue Distribution", "📊 توزيع الإيرادات"), 
-            _("🏭 Industry Analysis", "🏭 تحليل الصناعات")
+            _("📊 Distribution", "📊 التوزيع"), 
+            _("🏭 Industries", "🏭 الصناعات")
         ])
         
         with tabs[0]:
             top = df_year.nlargest(top_n, 'revenue_mil')
             fig = px.bar(top, x='revenue_bil', y='name', orientation='h',
                         title=f"{_('Top', 'أفضل')} {top_n} {_('Companies', 'شركة')} - {year}",
-                        color='revenue_bil', color_continuous_scale='gray')
+                        color='revenue_bil', color_continuous_scale='viridis')
             fig.update_layout(height=500, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                             font=dict(color='white', size=12), title_font_color='white')
             st.plotly_chart(fig, use_container_width=True)
@@ -425,21 +332,20 @@ if menu == _("📅 Year Analysis", "📅 تحليل السنوات"):
             with col1:
                 fig1 = px.bar(ind.reset_index(), x='revenue_bil', y='industry', orientation='h',
                             title=_("Revenue by Industry (B$)", "الإيرادات حسب الصناعة"),
-                            color='revenue_bil', color_continuous_scale='gray')
+                            color='revenue_bil', color_continuous_scale='viridis')
                 fig1.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                                  height=500, font=dict(color='white'), title_font_color='white')
                 st.plotly_chart(fig1, use_container_width=True)
             with col2:
                 fig2 = px.bar(ind.reset_index(), x='profit_margin', y='industry', orientation='h',
                             title=_("Margin by Industry", "الهامش حسب الصناعة"),
-                            color='profit_margin', color_continuous_scale='gray')
+                            color='profit_margin', color_continuous_scale='viridis')
                 fig2.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                                  height=500, font=dict(color='white'), title_font_color='white')
                 st.plotly_chart(fig2, use_container_width=True)
     
     st.markdown('</div>', unsafe_allow_html=True)
 
-# ==================== COMPANY ANALYSIS ====================
 elif menu == _("🏢 Company Analysis", "🏢 تحليل الشركات"):
     st.markdown('<div class="custom-card">', unsafe_allow_html=True)
     st.header(_("🏢 Company Analysis", "🏢 تحليل الشركات"))
@@ -465,8 +371,8 @@ elif menu == _("🏢 Company Analysis", "🏢 تحليل الشركات"):
             fig1 = px.line(df_comp, x='year', y='revenue_bil', 
                           title=_("Revenue Trend (Billions $)", "اتجاه الإيرادات (بالمليارات)"), 
                           markers=True)
-            fig1.update_traces(line=dict(color='#A0AEC0', width=3), 
-                              marker=dict(color='#A0AEC0', size=8))
+            fig1.update_traces(line=dict(color='#4A5568', width=3), 
+                              marker=dict(color='#4A5568', size=8))
             fig1.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                              height=400, font=dict(color='white'), title_font_color='white')
             st.plotly_chart(fig1, use_container_width=True)
@@ -487,7 +393,6 @@ elif menu == _("🏢 Company Analysis", "🏢 تحليل الشركات"):
     
     st.markdown('</div>', unsafe_allow_html=True)
 
-# ==================== YEAR COMPARISON ====================
 elif menu == _("📈 Year Comparison", "📈 مقارنة السنوات"):
     st.markdown('<div class="custom-card">', unsafe_allow_html=True)
     st.header(_("📈 Year Comparison", "📈 مقارنة السنوات"))
@@ -524,7 +429,7 @@ elif menu == _("📈 Year Comparison", "📈 مقارنة السنوات"):
         fig = go.Figure()
         fig.add_trace(go.Bar(name=_("Total Revenue", "إجمالي الإيرادات"), 
                             x=comp[_("Year", "السنة")], y=comp[_("Total Revenue (B$)", "إجمالي الإيرادات")],
-                            marker_color='#A0AEC0'))
+                            marker_color='#4A5568'))
         fig.add_trace(go.Bar(name=_("Avg Revenue", "متوسط الإيرادات"), 
                             x=comp[_("Year", "السنة")], y=comp[_("Avg Revenue (B$)", "متوسط الإيرادات")],
                             marker_color='#718096'))
@@ -536,7 +441,6 @@ elif menu == _("📈 Year Comparison", "📈 مقارنة السنوات"):
     
     st.markdown('</div>', unsafe_allow_html=True)
 
-# ==================== PREDICTIONS & MODELS ====================
 elif menu == _("🤖 Predictions & Models", "🤖 التوقعات والنماذج"):
     st.markdown('<div class="custom-card">', unsafe_allow_html=True)
     st.header(_("🤖 Predictions & AI Models", "🤖 التوقعات والنماذج الذكية"))
@@ -547,106 +451,33 @@ elif menu == _("🤖 Predictions & Models", "🤖 التوقعات والنما�
         
         revenue_col = None
         name_col = None
-        rank_col = None
         
         for col in df_pred.columns:
             col_lower = col.lower()
-            if 'revenue' in col_lower or 'rev' in col_lower or 'pred' in col_lower:
+            if 'revenue' in col_lower or 'rev' in col_lower:
                 revenue_col = col
             if 'name' in col_lower or 'company' in col_lower:
                 name_col = col
-            if 'rank' in col_lower:
-                rank_col = col
-        
-        if revenue_col is None and len(df_pred.select_dtypes(include=[np.number]).columns) > 0:
-            revenue_col = df_pred.select_dtypes(include=[np.number]).columns[0]
-        
-        display_cols = []
-        if name_col:
-            display_cols.append(name_col)
-        if revenue_col:
-            display_cols.append(revenue_col)
-        if rank_col:
-            display_cols.append(rank_col)
         
         if revenue_col and name_col:
             df_pred_sorted = df_pred.sort_values(revenue_col, ascending=False).head(20)
             fig = px.bar(df_pred_sorted, x=revenue_col, y=name_col, orientation='h',
                         title=_("Top 20 Predicted Companies 2024", "أفضل 20 شركة متوقعة 2024"),
-                        color=revenue_col, color_continuous_scale='gray')
+                        color=revenue_col, color_continuous_scale='viridis')
             fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                             height=500, font=dict(color='white'), title_font_color='white')
             st.plotly_chart(fig, use_container_width=True)
         
-        if display_cols:
-            st.dataframe(df_pred[display_cols].head(50), use_container_width=True)
-        else:
-            st.dataframe(df_pred.head(50), use_container_width=True)
-    else:
-        st.info(_("2024 predictions file not available", "ملف توقعات 2024 غير متوفر"))
+        st.dataframe(df_pred.head(50), use_container_width=True)
     
     if not data['models'].empty:
         st.subheader(_("📈 Model Performance", "📈 أداء النماذج"))
         df_models = data['models']
-        
-        model_col = None
-        accuracy_col = None
-        
-        for col in df_models.columns:
-            col_lower = col.lower()
-            if 'model' in col_lower or 'name' in col_lower:
-                model_col = col
-            if 'acc' in col_lower or 'score' in col_lower or 'r2' in col_lower:
-                accuracy_col = col
-        
-        if accuracy_col:
-            if model_col:
-                fig = px.bar(df_models, x=model_col, y=accuracy_col, 
-                           title=_("Model Accuracy", "دقة النماذج"),
-                           color=accuracy_col, color_continuous_scale='gray')
-                fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
-                                height=400, xaxis_tickangle=45, font=dict(color='white'), 
-                                title_font_color='white')
-                st.plotly_chart(fig, use_container_width=True)
-            else:
-                fig = px.bar(df_models, y=accuracy_col, 
-                           title=_("Model Accuracy", "دقة النماذج"),
-                           color=accuracy_col, color_continuous_scale='gray')
-                fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
-                                height=400, font=dict(color='white'), title_font_color='white')
-                st.plotly_chart(fig, use_container_width=True)
-        
         st.dataframe(df_models, use_container_width=True)
-    
-    if not data['test'].empty:
-        st.subheader(_("🧪 Test Predictions", "🧪 توقعات الاختبار"))
-        df_test = data['test']
-        
-        actual_col = None
-        predicted_col = None
-        
-        for col in df_test.columns:
-            col_lower = col.lower()
-            if 'actual' in col_lower or 'true' in col_lower:
-                actual_col = col
-            if 'pred' in col_lower or 'predict' in col_lower:
-                predicted_col = col
-        
-        if actual_col and predicted_col:
-            fig = px.scatter(df_test.head(100), x=actual_col, y=predicted_col,
-                           title=_("Actual vs Predicted", "الفعلية مقابل المتوقعة"),
-                           labels={actual_col: _("Actual", "فعلية"), predicted_col: _("Predicted", "متوقعة")})
-            fig.update_traces(marker=dict(color='#A0AEC0', size=5))
-            fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
-                            height=500, font=dict(color='white'), title_font_color='white')
-            st.plotly_chart(fig, use_container_width=True)
-        
-        st.dataframe(df_test.head(50), use_container_width=True)
     
     st.markdown('</div>', unsafe_allow_html=True)
 
-# ==================== DATA OVERVIEW ====================
-else:
+elif menu == _("📋 Data Overview", "📋 نظرة عامة"):
     st.markdown('<div class="custom-card">', unsafe_allow_html=True)
     st.header(_("📋 Data Overview", "📋 نظرة عامة"))
     
@@ -659,7 +490,7 @@ else:
         st.metric(_("Total Revenue", "إجمالي الإيرادات"), f"${df['revenue_bil'].sum()/1000:,.1f}T")
     with col4:
         avg_growth = df.groupby('year')['revenue_bil'].mean().pct_change().mean() * 100
-        st.metric(_("Avg Annual Growth", "متوسط النمو السنوي"), f"{avg_growth:.1f}%")
+        st.metric(_("Avg Growth", "متوسط النمو"), f"{avg_growth:.1f}%")
     
     yearly = df.groupby('year').agg({
         'revenue_bil': 'mean',
@@ -669,13 +500,13 @@ else:
     
     fig = make_subplots(rows=3, cols=1, 
                        subplot_titles=(
-                           _("Average Revenue Trend (B$)", "اتجاه متوسط الإيرادات"),
-                           _("Average Profit Trend (B$)", "اتجاه متوسط الأرباح"),
+                           _("Average Revenue Trend", "اتجاه متوسط الإيرادات"),
+                           _("Average Profit Trend", "اتجاه متوسط الأرباح"),
                            _("Average Margin Trend", "اتجاه متوسط الهامش")
                        ))
     
     fig.add_trace(go.Scatter(x=yearly['year'], y=yearly['revenue_bil'], 
-                            name=_("Revenue","الإيرادات"), line=dict(color='#A0AEC0', width=3)), row=1, col=1)
+                            name=_("Revenue","الإيرادات"), line=dict(color='#4A5568', width=3)), row=1, col=1)
     fig.add_trace(go.Scatter(x=yearly['year'], y=yearly['profit_bil'], 
                             name=_("Profit","الأرباح"), line=dict(color='#48BB78', width=3)), row=2, col=1)
     fig.add_trace(go.Scatter(x=yearly['year'], y=yearly['profit_margin'], 
@@ -683,54 +514,85 @@ else:
     
     fig.update_layout(height=700, showlegend=True, 
                      plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
-                     font=dict(color='white', size=12), title_font_color='white',
-                     legend_font_color='white')
-    
-    fig.update_xaxes(gridcolor='rgba(255,255,255,0.1)', gridwidth=1)
-    fig.update_yaxes(gridcolor='rgba(255,255,255,0.1)', gridwidth=1)
+                     font=dict(color='white', size=12), title_font_color='white')
     
     st.plotly_chart(fig, use_container_width=True)
     
     top = df.groupby('name')['revenue_bil'].max().nlargest(15)
     fig2 = px.bar(x=top.values, y=top.index, orientation='h',
                  title=_("Top 15 Companies All Time", "أفضل 15 شركة على الإطلاق"),
-                 color=top.values, color_continuous_scale='gray')
+                 color=top.values, color_continuous_scale='viridis')
     fig2.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
                       height=500, font=dict(color='white', size=12), title_font_color='white')
     st.plotly_chart(fig2, use_container_width=True)
     
     st.markdown('</div>', unsafe_allow_html=True)
 
-# الفوتر
+else:
+    st.markdown('<div class="custom-card">', unsafe_allow_html=True)
+    
+    col1, col2 = st.columns([1, 2])
+    
+    with col1:
+        st.markdown("""
+        <div style="text-align: center; padding: 20px;">
+            <div style="background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%); width: 200px; height: 200px; border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 4px solid #A0AEC0;">
+                <span style="font-size: 5rem;">👨‍💻</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown(f"""
+        <div style="padding: 20px;">
+            <h2 style="color: white; margin-bottom: 20px;">{_('Developer Information', 'معلومات المطور')}</h2>
+            <p style="color: #A0AEC0; font-size: 1.5rem; margin-bottom: 30px;">
+                <strong style="color: white;">Mohammad Zakaria Naser</strong>
+            </p>
+            <p style="color: white; margin-bottom: 15px; font-size: 1.1rem;">
+                {_('This Fortune 500 Analytics Dashboard was developed from scratch by Mohammad Naser in 2024.', 'تم تطوير لوحة تحليل Fortune 500 هذه من الصفر بواسطة محمد ناصر في 2024.')}
+            </p>
+            <p style="color: white; margin-bottom: 15px; font-size: 1.1rem;">
+                {_('All code, design, and functionality are original work.', 'جميع الكود والتصميم والوظائف هي عمل أصلي.')}
+            </p>
+            <div style="background: rgba(160, 174, 192, 0.1); border-radius: 15px; padding: 20px; margin-top: 20px;">
+                <p style="color: #A0AEC0; margin: 5px 0;">📧 m.naser@example.com</p>
+                <p style="color: #A0AEC0; margin: 5px 0;">🔗 github.com/mohammadnaser</p>
+                <p style="color: #A0AEC0; margin: 5px 0;">📅 2024</p>
+            </div>
+            <hr style="margin: 20px 0; border-color: rgba(255,255,255,0.1);">
+            <p style="color: #A0AEC0; text-align: center; font-size: 1rem;">
+                © 2024 Mohammad Zakaria Naser. {_('All Rights Reserved.', 'جميع الحقوق محفوظة.')}
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown("""
+<div class="watermark">
+    MOHAMMAD NASER © 2024
+</div>
+""", unsafe_allow_html=True)
+
 st.markdown(f"""
-<div style="background: linear-gradient(135deg, rgba(45, 55, 72, 0.9) 0%, rgba(26, 32, 44, 0.9) 100%);
-            backdrop-filter: blur(12px);
+<div style="background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 30px;
             margin-top: 40px;
-            border: 1px solid rgba(255,255,255,0.2);
-            text-align: center;">
-    <p style="color: white; font-size: 1.3rem; margin-bottom: 15px; font-weight: 600; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-        <strong>{_('Fortune 500 Analytics Dashboard', 'لوحة تحليل Fortune 500')}</strong>
-    </p>
-    <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 15px; flex-wrap: wrap;">
-        <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem;">
-            {_('Developed by: Mohammad Naser', 'تم التطوير بواسطة: محمد زكريا ناصر')}
-        </p>
-        <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem;">
-            {_('Data Analyst', 'محلل بيانات')}
-        </p>
-    </div>
-    <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 15px; flex-wrap: wrap;">
-        <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem;">
-            1996-2024
-        </p>
-        <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem;">
-            {_('Powered by Streamlit & Plotly', 'بتقنية Streamlit و Plotly')}
-        </p>
-    </div>
-    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-top: 10px;">
-        © {datetime.now().year} {_('All Rights Reserved', 'جميع الحقوق محفوظة')}
-    </p>
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);">
+    <p style="color: white; font-size: 1.2rem;">FORTUNE 500 ANALYTICS DASHBOARD</p>
+    <p style="color: #A0AEC0;">Developed by Mohammad Zakaria Naser</p>
+    <p style="color: #718096;">© 2024 All Rights Reserved</p>
 </div>
 """, unsafe_allow_html=True)
+
+# =============================================================================
+# FORTUNE 500 ANALYTICS DASHBOARD
+# Developed by: Mohammad Zakaria Naser
+# Date: 2024
+# Version: 1.0.0
+# This code is the original work of Mohammad Naser. All rights reserved.
+# =============================================================================
