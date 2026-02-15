@@ -22,7 +22,7 @@ def get_base64_of_image(image_path):
 
 # تحميل الصور
 background_image_path = r"WhatsApp Image 2026-02-11 at 3.32.24 PM.jpeg"
-profile_image_path = r"WhatsApp Image 2026-02-10 at 1.34.39 PM.jpeg"  # صورتك الشخصية
+profile_image_path = r"WhatsApp Image 2026-02-10 at 1.34.39 PM.jpeg"
 
 background_image_base64 = get_base64_of_image(background_image_path)
 profile_image_base64 = get_base64_of_image(profile_image_path)
@@ -341,14 +341,15 @@ div[data-testid="stMetric"]:nth-of-type(1) div {{
 
 # ==================== SIDEBAR ====================
 with st.sidebar:
-    # صورة المdeveloper - تظهر في أعلى الشريط الجانبي
+  
     st.markdown(f"""
     <div class="developer-profile">
         <img src="data:image/jpeg;base64,{profile_image_base64}" class="developer-image" alt="Developer">
         
         <div class="developer-title">Mohammad Naser</div>
         <div style="color: #A0AEC0; font-size: 0.8rem; margin-top: 5px;">
-            ⭐ 'Data Analyst', 'محلل بيانات'
+        
+             Data Analyst محلل بيانات
         </div>
     </div>
     """, unsafe_allow_html=True)
