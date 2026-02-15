@@ -338,18 +338,7 @@ st.markdown(f"""
     <p style="color: rgba(255,255,255,0.95); margin-top: 15px; font-size: 1.4rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
         {_('1996-2024 Analysis & Predictions', 'تحليل وتوقعات 1996-2024')}
     </p>
-    <div style="background: rgba(160, 174, 192, 0.2); 
-                backdrop-filter: blur(8px);
-                padding: 15px; 
-                border-radius: 15px; 
-                margin-top: 25px; 
-                border: 1px solid rgba(160, 174, 192, 0.5);
-                max-width: 400px;
-                margin-left: auto;
-                margin-right: auto;">
-        <p style="color: white; margin: 0; font-size: 1.2rem; font-weight: 500;">
-            {_('Developed by: Mohammad Naser', 'تم التطوير بواسطة: محمد زكريا ناصر')}
-        </p>
+   
     </div>
 </div>
 """, unsafe_allow_html=True)
