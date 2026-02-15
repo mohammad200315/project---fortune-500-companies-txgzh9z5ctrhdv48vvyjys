@@ -27,17 +27,11 @@ profile_image_path = r"WhatsApp Image 2026-02-10 at 1.34.39 PM.jpeg"
 background_image_base64 = get_base64_of_image(background_image_path)
 profile_image_base64 = get_base64_of_image(profile_image_path)
 
-# تهيئة حالة الشريط الجانبي في session state
-if 'sidebar_visible' not in st.session_state:
-    st.session_state.sidebar_visible = True
+# تهيئة حالة اللغة والقائمة
 if 'lang' not in st.session_state:
     st.session_state.lang = "English"
 if 'menu' not in st.session_state:
     st.session_state.menu = "📊 Year Analysis"
-
-# دالة لتبديل حالة الشريط الجانبي
-def toggle_sidebar():
-    st.session_state.sidebar_visible = not st.session_state.sidebar_visible
 
 st.markdown(f"""
 <style>
@@ -75,37 +69,6 @@ header {{
     background: rgba(10, 10, 20, 0.95) !important;
     backdrop-filter: blur(10px) !important;
     border-right: 1px solid rgba(255,255,255,0.15) !important;
-    transition: all 0.3s ease !important;
-}}
-
-/* تنسيق زر التحكم بالشريط الجانبي - باستخدام Streamlit button */
-div[data-testid="stButton"] button {{
-    position: fixed !important;
-    top: 20px !important;
-    left: 20px !important;
-    z-index: 999999 !important;
-    background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%) !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 50% !important;
-    width: 50px !important;
-    height: 50px !important;
-    font-size: 24px !important;
-    cursor: pointer !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
-    border: 2px solid rgba(255,255,255,0.3) !important;
-    transition: all 0.3s ease !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 !important;
-}}
-
-div[data-testid="stButton"] button:hover {{
-    transform: scale(1.1) !important;
-    background: linear-gradient(135deg, #2D3748 0%, #1A202C 100%) !important;
-    border-color: white !important;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.7) !important;
 }}
 
 /* تنسيق صورة المطور في الشريط الجانبي */
@@ -312,49 +275,6 @@ hr {{
 </style>
 """, unsafe_allow_html=True)
 
-# ==================== زر التحكم بالشريط الجانبي (باستخدام Streamlit button) ====================
-col1, col2, col3 = st.columns([1, 10, 1])
-with col1:
-    if st.button("☰", key="sidebar_toggle"):
-        toggle_sidebar()
-        st.rerun()
-
-# تطبيق حالة الشريط الجانبي باستخدام CSS
-if not st.session_state.sidebar_visible:
-    st.markdown("""
-    <style>
-        [data-testid="stSidebar"] {
-            display: none !important;
-        }
-        .main .block-container {
-            max-width: 100% !important;
-            padding-left: 5rem !important;
-            padding-right: 5rem !important;
-        }
-    </style>
-    """, unsafe_allow_html=True)
-
-# ==================== MAIN HEADER ====================
-st.markdown(f"""
-<div style="background: linear-gradient(135deg, rgba(45, 55, 72, 0.95) 0%, rgba(26, 32, 44, 0.95) 100%);
-            backdrop-filter: blur(12px);
-            padding: 25px; 
-            border-radius: 10px; 
-            margin-bottom: 30px; 
-            margin-left: 30px;
-            margin-right: 30px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.25);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
-    <h1 style="color: white; margin: 0; font-size: 3.2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-weight: 700; letter-spacing: 1px;">
-        {'Fortune 500 Analytics Dashboard' if st.session_state.lang == 'English' else 'لوحة تحليل Fortune 500'}
-    </h1>
-    <p style="color: rgba(255,255,255,0.95); margin-top: 15px; font-size: 1.4rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-        {'1996-2024 Analysis & Predictions' if st.session_state.lang == 'English' else 'تحليل وتوقعات 1996-2024'}
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
 # ==================== SIDEBAR ====================
 with st.sidebar:
     st.markdown(f"""
@@ -393,6 +313,27 @@ with st.sidebar:
     
     st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
 
+# ==================== MAIN HEADER ====================
+st.markdown(f"""
+<div style="background: linear-gradient(135deg, rgba(45, 55, 72, 0.95) 0%, rgba(26, 32, 44, 0.95) 100%);
+            backdrop-filter: blur(12px);
+            padding: 25px; 
+            border-radius: 10px; 
+            margin-bottom: 30px; 
+            margin-left: 30px;
+            margin-right: 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+    <h1 style="color: white; margin: 0; font-size: 3.2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-weight: 700; letter-spacing: 1px;">
+        {'Fortune 500 Analytics Dashboard' if st.session_state.lang == 'English' else 'لوحة تحليل Fortune 500'}
+    </h1>
+    <p style="color: rgba(255,255,255,0.95); margin-top: 15px; font-size: 1.4rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+        {'1996-2024 Analysis & Predictions' if st.session_state.lang == 'English' else 'تحليل وتوقعات 1996-2024'}
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
 # ==================== DATA LOADING ====================
 @st.cache_data
 def load_data():
@@ -423,7 +364,7 @@ data = load_data()
 df = data['main']
 
 if df.empty:
-    st.error("Main data file not found!" if st.session_state.lang == "English" else "ملف البيانات الرئيسي غير موجود!")
+    st.error("Main data file not found!" if st.session_state.lang == "English" else "ملf البيانات الرئيسي غير موجود!")
     st.stop()
 
 df['profit_margin'] = (df['profit_mil'] / df['revenue_mil']) * 100
