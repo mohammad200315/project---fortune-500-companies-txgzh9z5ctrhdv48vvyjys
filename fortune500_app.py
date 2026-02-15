@@ -31,7 +31,7 @@ profile_image_base64 = get_base64_of_image(profile_image_path)
 if 'lang' not in st.session_state:
     st.session_state.lang = "English"
 if 'menu' not in st.session_state:
-    st.session_state.menu = "📊 Year Analysi"
+    st.session_state.menu = "📊 Year Analys"
 
 st.markdown(f"""
 <style>
