@@ -37,7 +37,6 @@ st.markdown(f"""
 }}
 
 .main > div {{
-    background: rgba(0, 0, 0, 0.65) !important;
     backdrop-filter: blur(8px) !important;
     border-radius: 20px !important;
     padding: 20px !important;
@@ -184,7 +183,12 @@ st.markdown(f"""
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
 }}
 
-
+.stSelectbox > div > div {{
+    background: rgba(40, 45, 60, 0.9) !important;
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    border-radius: 8px !important;
+}}
 
 h1, h2, h3, h4, h5, h6 {{
     color: #ffffff !important;
