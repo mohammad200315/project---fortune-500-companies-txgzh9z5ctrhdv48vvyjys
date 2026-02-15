@@ -30,7 +30,7 @@ profile_image_base64 = get_base64_of_image(profile_image_path)
 st.markdown(f"""
 <style>
 /* إخفاء العناصر الزائدة فقط */
-#MainMenu {{visibility: hidden;}}
+MainMenu {{visibility: hidden;}}
 footer {{visibility: hidden;}}
 .stDeployButton {{display: none;}}
 .stAppToolbar {{display: none;}}
