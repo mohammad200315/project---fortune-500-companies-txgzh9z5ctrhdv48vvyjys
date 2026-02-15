@@ -339,7 +339,7 @@ st.markdown(f"""
         {_('1996-2024 Analysis & Predictions', 'تحليل وتوقعات 1996-2024')}
     </p>
    
-    </div>
+    
 </div>
 """, unsafe_allow_html=True)
 
