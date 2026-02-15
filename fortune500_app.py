@@ -267,8 +267,16 @@ div[data-testid="stMetric"]:nth-of-type(1) div {{
 </style>
 """, unsafe_allow_html=True)
 
-# ==================== SIDEBAR - MOVED SELECT ANALYSIS ABOVE LANGUAGE ====================
+# ==================== TRANSLATION FUNCTION ====================
+# تعريف دالة الترجمة أولاً
+def _(en, ar):
+    return en if lang == "English" else ar
+
+# ==================== SIDEBAR ====================
 with st.sidebar:
+    # LANGUAGE SELECTION FIRST (لأن دالة الترجمة تحتاجها)
+    lang = st.radio("Language / اللغة", ["English", "العربية"], index=0, key="language")
+    
     st.markdown(f"""
     <div style="background: linear-gradient(135deg, rgba(45, 55, 72, 0.25) 0%, rgba(26, 32, 44, 0.25) 100%);
                 backdrop-filter: blur(12px);
@@ -288,8 +296,10 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     
-    # SELECT ANALYSIS FIRST (NOW ABOVE LANGUAGE)
-    menu_selection = st.radio(
+    st.markdown("<hr style='margin: 20px 0;'>", unsafe_allow_html=True)
+    
+    # SELECT ANALYSIS BELOW
+    menu = st.radio(
         _("Select Analysis", "اختر التحليل"),
         [
             _("Year Analysis", "تحليل السنوات"),
@@ -300,15 +310,6 @@ with st.sidebar:
         ],
         key="analysis_menu"
     )
-    
-    st.markdown("<hr style='margin: 20px 0;'>", unsafe_allow_html=True)
-    
-    # LANGUAGE SELECTION BELOW
-    lang = st.radio("Language / اللغة", ["English", "العربية"], index=0, key="language")
-
-# ==================== TRANSLATION FUNCTION ====================
-def _(en, ar):
-    return en if lang == "English" else ar
 
 # ==================== DATA LOADING ====================
 @st.cache_data
@@ -382,8 +383,6 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ==================== MAIN CONTENT BASED ON SELECTION ====================
-menu = menu_selection  # Use the selection from sidebar
-
 if menu == _("Year Analysis", "تحليل السنوات"):
     st.markdown('<div class="custom-card">', unsafe_allow_html=True)
     st.header(_("Year Analysis", "تحليل السنوات"))
