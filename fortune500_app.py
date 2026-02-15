@@ -78,8 +78,8 @@ header {{
     transition: all 0.3s ease !important;
 }}
 
-/* تنسيق زر التحكم بالشريط الجانبي - يظهر دائماً */
-.sidebar-toggle-btn {{
+/* تنسيق زر التحكم بالشريط الجانبي - باستخدام Streamlit button */
+div[data-testid="stButton"] button {{
     position: fixed !important;
     top: 20px !important;
     left: 20px !important;
@@ -98,10 +98,10 @@ header {{
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    text-decoration: none !important;
+    padding: 0 !important;
 }}
 
-.sidebar-toggle-btn:hover {{
+div[data-testid="stButton"] button:hover {{
     transform: scale(1.1) !important;
     background: linear-gradient(135deg, #2D3748 0%, #1A202C 100%) !important;
     border-color: white !important;
@@ -310,55 +310,29 @@ hr {{
     border-radius: 8px !important;
 }}
 </style>
-
-<!-- JavaScript للتحكم بالشريط الجانبي -->
-<script>
-function toggleSidebar() {{
-    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    const currentDisplay = window.getComputedStyle(sidebar).display;
-    
-    if (currentDisplay === 'none') {{
-        sidebar.style.display = 'block';
-        sidebar.style.visibility = 'visible';
-        sidebar.style.width = '21rem';
-        localStorage.setItem('sidebar_state', 'expanded');
-    }} else {{
-        sidebar.style.display = 'none';
-        sidebar.style.visibility = 'hidden';
-        sidebar.style.width = '0';
-        localStorage.setItem('sidebar_state', 'collapsed');
-    }}
-}}
-
-// استعادة حالة الشريط الجانبي عند تحميل الصفحة
-function initializeSidebar() {{
-    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    const savedState = localStorage.getItem('sidebar_state');
-    
-    if (savedState === 'collapsed') {{
-        sidebar.style.display = 'none';
-        sidebar.style.visibility = 'hidden';
-        sidebar.style.width = '0';
-    }} else {{
-        sidebar.style.display = 'block';
-        sidebar.style.visibility = 'visible';
-        sidebar.style.width = '21rem';
-    }}
-}}
-
-// تنفيذ الدالة بعد تحميل الصفحة
-if (document.readyState === 'loading') {{
-    document.addEventListener('DOMContentLoaded', initializeSidebar);
-}} else {{
-    setTimeout(initializeSidebar, 100);
-}}
-</script>
 """, unsafe_allow_html=True)
 
-# ==================== زر التحكم بالشريط الجانبي (يظهر دائماً) ====================
-st.markdown("""
-<button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
-""", unsafe_allow_html=True)
+# ==================== زر التحكم بالشريط الجانبي (باستخدام Streamlit button) ====================
+col1, col2, col3 = st.columns([1, 10, 1])
+with col1:
+    if st.button("☰", key="sidebar_toggle"):
+        toggle_sidebar()
+        st.rerun()
+
+# تطبيق حالة الشريط الجانبي باستخدام CSS
+if not st.session_state.sidebar_visible:
+    st.markdown("""
+    <style>
+        [data-testid="stSidebar"] {
+            display: none !important;
+        }
+        .main .block-container {
+            max-width: 100% !important;
+            padding-left: 5rem !important;
+            padding-right: 5rem !important;
+        }
+    </style>
+    """, unsafe_allow_html=True)
 
 # ==================== MAIN HEADER ====================
 st.markdown(f"""
