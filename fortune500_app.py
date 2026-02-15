@@ -357,13 +357,7 @@ with st.sidebar:
     lang = st.radio("Language / اللغة", ["English", "العربية"], index=0, key="language")
     
     st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
-    
-    # Control Panel
-    st.markdown(f"""
-    <div class="sidebar-section">
-        <div class="sidebar-title">{'🎮 Control Panel' if lang == 'English' else '🎮 لوحة التحكم'}</div>
-    </div>
-    """, unsafe_allow_html=True)
+
     
     # SELECT ANALYSIS (بدون استخدام دالة الترجمة)
     if lang == "English":
@@ -391,13 +385,7 @@ with st.sidebar:
     
     st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
     
-    # Quick Stats
-    with st.expander("📊 Quick Stats" if lang == "English" else "📊 إحصائيات سريعة", expanded=False):
-        col1, col2 = st.columns(2)
-        with col1:
-            st.metric("Companies" if lang == "English" else "الشركات", f"{df['name'].nunique():,}" if 'df' in locals() else "0")
-        with col2:
-            st.metric("Years" if lang == "English" else "السنوات", f"{df['year'].nunique()}" if 'df' in locals() else "0")
+
 
 # ==================== DATA LOADING ====================
 @st.cache_data
