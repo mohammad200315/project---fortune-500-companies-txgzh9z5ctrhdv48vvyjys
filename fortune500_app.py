@@ -27,82 +27,13 @@ profile_image_path = r"WhatsApp Image 2026-02-10 at 1.34.39 PM.jpeg"
 background_image_base64 = get_base64_of_image(background_image_path)
 profile_image_base64 = get_base64_of_image(profile_image_path)
 
-# JavaScript محدث للتحكم بالشريط الجانبي بشكل صحيح
-st.markdown("""
-<script>
-// دالة لتبديل حالة الشريط الجانبي
-function toggleSidebar() {
-    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    const mainBlock = window.parent.document.querySelector('.block-container');
-    const currentDisplay = window.getComputedStyle(sidebar).display;
-    
-    if (currentDisplay === 'none') {
-        // إظهار الشريط الجانبي
-        sidebar.style.display = 'block';
-        sidebar.style.visibility = 'visible';
-        sidebar.style.width = '21rem';
-        mainBlock.style.marginLeft = '21rem';
-        localStorage.setItem('sidebar_state', 'expanded');
-    } else {
-        // إخفاء الشريط الجانبي
-        sidebar.style.display = 'none';
-        sidebar.style.visibility = 'hidden';
-        sidebar.style.width = '0';
-        mainBlock.style.marginLeft = '0';
-        localStorage.setItem('sidebar_state', 'collapsed');
-    }
-}
+# تهيئة حالة الشريط الجانبي في session state
+if 'sidebar_visible' not in st.session_state:
+    st.session_state.sidebar_visible = True
 
-// استعادة حالة الشريط الجانبي عند تحميل الصفحة
-function initializeSidebar() {
-    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    const mainBlock = window.parent.document.querySelector('.block-container');
-    const savedState = localStorage.getItem('sidebar_state');
-    
-    if (savedState === 'collapsed') {
-        sidebar.style.display = 'none';
-        sidebar.style.visibility = 'hidden';
-        sidebar.style.width = '0';
-        mainBlock.style.marginLeft = '0';
-    } else {
-        sidebar.style.display = 'block';
-        sidebar.style.visibility = 'visible';
-        sidebar.style.width = '21rem';
-        mainBlock.style.marginLeft = '21rem';
-    }
-}
-
-// التأكد من تحميل الصفحة بالكامل قبل تطبيق الحالة
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeSidebar);
-} else {
-    setTimeout(initializeSidebar, 100); // تأخير بسيط للتأكد من تحميل كل العناصر
-}
-
-// مراقبة التغييرات في DOM لإعادة تطبيق الحالة إذا لزم الأمر
-const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-        if (mutation.type === 'childList' || mutation.type === 'subtree') {
-            const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-            const savedState = localStorage.getItem('sidebar_state');
-            if (sidebar && savedState === 'collapsed') {
-                sidebar.style.display = 'none';
-                sidebar.style.visibility = 'hidden';
-                sidebar.style.width = '0';
-            }
-        }
-    });
-});
-
-// بدء المراقبة بعد تحميل الصفحة
-window.parent.document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-        const targetNode = window.parent.document.body;
-        observer.observe(targetNode, { childList: true, subtree: true });
-    }, 500);
-});
-</script>
-""", unsafe_allow_html=True)
+# دالة لتبديل حالة الشريط الجانبي
+def toggle_sidebar():
+    st.session_state.sidebar_visible = not st.session_state.sidebar_visible
 
 st.markdown(f"""
 <style>
@@ -134,11 +65,10 @@ footer {{visibility: hidden;}}
     background: rgba(10, 10, 20, 0.95) !important;
     backdrop-filter: blur(10px) !important;
     border-right: 1px solid rgba(255,255,255,0.15) !important;
-    transition: all 0.3s ease !important;
 }}
 
 /* تنسيق زر التحكم بالشريط الجانبي */
-.custom-sidebar-btn {{
+.sidebar-toggle-btn {{
     position: fixed !important;
     top: 20px !important;
     left: 20px !important;
@@ -160,7 +90,7 @@ footer {{visibility: hidden;}}
     text-decoration: none !important;
 }}
 
-.custom-sidebar-btn:hover {{
+.sidebar-toggle-btn:hover {{
     transform: scale(1.1) !important;
     background: linear-gradient(135deg, #2D3748 0%, #1A202C 100%) !important;
     border-color: white !important;
@@ -386,56 +316,53 @@ hr {{
     border: 1px solid rgba(255,255,255,0.2) !important;
     border-radius: 8px !important;
 }}
-
-/* تنسيق الحاوية الرئيسية */
-.block-container {{
-    transition: margin-left 0.3s ease !important;
-}}
 </style>
 """, unsafe_allow_html=True)
 
-# ==================== SIDEBAR TOGGLE BUTTON ====================
-st.markdown("""
-<button class="custom-sidebar-btn" onclick="toggleSidebar()">☰</button>
-""", unsafe_allow_html=True)
+# ==================== زر التحكم بالشريط الجانبي ====================
+col1, col2, col3 = st.columns([1, 10, 1])
+with col1:
+    if st.button("☰", key="sidebar_toggle"):
+        toggle_sidebar()
 
 # ==================== SIDEBAR ====================
-with st.sidebar:
-    st.markdown(f"""
-    <div class="developer-profile">
-        <img src="data:image/jpeg;base64,{profile_image_base64}" class="developer-image" alt="Developer">
-        <div class="developer-name">Mohammad Naser</div>
-    </div> 
-    """, unsafe_allow_html=True)
- 
-    lang = st.radio("Language / اللغة", ["English", "العربية"], index=0, key="language")
-    
-    st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
+if st.session_state.sidebar_visible:
+    with st.sidebar:
+        st.markdown(f"""
+        <div class="developer-profile">
+            <img src="data:image/jpeg;base64,{profile_image_base64}" class="developer-image" alt="Developer">
+            <div class="developer-name">Mohammad Naser</div>
+        </div> 
+        """, unsafe_allow_html=True)
+     
+        lang = st.radio("Language / اللغة", ["English", "العربية"], index=0, key="language")
+        
+        st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
 
-    if lang == "English":
-        menu_options = [
-            "📊 Year Analysis",
-            "🏢 Company Analysis",
-            "⚖️ Year Comparison",
-            "🤖 Predictions & Models",
-            "📈 Data Overview"
-        ]
-    else:
-        menu_options = [
-            "📊 تحليل السنوات",
-            "🏢 تحليل الشركات",
-            "⚖️ مقارنة السنوات",
-            "🤖 التوقعات والنماذج",
-            "📈 نظرة عامة"
-        ]
-    
-    menu = st.radio(
-        "Select Analysis" if lang == "English" else "اختر التحليل",
-        menu_options,
-        key="analysis_menu"
-    )
-    
-    st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
+        if lang == "English":
+            menu_options = [
+                "📊 Year Analysis",
+                "🏢 Company Analysis",
+                "⚖️ Year Comparison",
+                "🤖 Predictions & Models",
+                "📈 Data Overview"
+            ]
+        else:
+            menu_options = [
+                "📊 تحليل السنوات",
+                "🏢 تحليل الشركات",
+                "⚖️ مقارنة السنوات",
+                "🤖 التوقعات والنماذج",
+                "📈 نظرة عامة"
+            ]
+        
+        menu = st.radio(
+            "Select Analysis" if lang == "English" else "اختر التحليل",
+            menu_options,
+            key="analysis_menu"
+        )
+        
+        st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
 
 # ==================== DATA LOADING ====================
 @st.cache_data
@@ -443,22 +370,26 @@ def load_data():
     files = {}
     try:
         files['main'] = pd.read_csv('fortune500_cleaned.csv')
-        st.sidebar.success(f"✅ Main: {len(files['main']):,} rows")
+        if st.session_state.sidebar_visible:
+            st.sidebar.success(f"✅ Main: {len(files['main']):,} rows")
     except:
         files['main'] = pd.DataFrame()
     try:
         files['pred2024'] = pd.read_csv('fortune500_2024_predictions.csv')
-        st.sidebar.success(f"✅ 2024: {len(files['pred2024']):,} rows")
+        if st.session_state.sidebar_visible:
+            st.sidebar.success(f"✅ 2024: {len(files['pred2024']):,} rows")
     except:
         files['pred2024'] = pd.DataFrame()
     try:
         files['models'] = pd.read_csv('fortune500_models_performance.csv')
-        st.sidebar.success(f"✅ Models: {len(files['models'])} models")
+        if st.session_state.sidebar_visible:
+            st.sidebar.success(f"✅ Models: {len(files['models'])} models")
     except:
         files['models'] = pd.DataFrame()
     try:
         files['test'] = pd.read_csv('fortune500_test_predictions.csv')
-        st.sidebar.success(f"✅ Test: {len(files['test']):,} rows")
+        if st.session_state.sidebar_visible:
+            st.sidebar.success(f"✅ Test: {len(files['test']):,} rows")
     except:
         files['test'] = pd.DataFrame()
     return files
@@ -491,7 +422,7 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# ==================== باقي الكود كما هو (Year Analysis, Company Analysis, etc.) ====================
+# ==================== MAIN CONTENT BASED ON SELECTION ====================
 if menu == "📊 Year Analysis" or menu == "📊 تحليل السنوات":
     st.markdown('<div class="custom-card">', unsafe_allow_html=True)
     st.header("📊 Year Analysis" if lang == "English" else "📊 تحليل السنوات")
