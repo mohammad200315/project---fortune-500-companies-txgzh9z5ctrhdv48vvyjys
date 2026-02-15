@@ -28,16 +28,10 @@ background_image_base64 = get_base64_of_image(background_image_path)
 profile_image_base64 = get_base64_of_image(profile_image_path)
 
 # تهيئة حالة الشريط الجانبي في session state
-if 'sidebar_visible' not in st.session_state:
-    st.session_state.sidebar_visible = True
 if 'lang' not in st.session_state:
     st.session_state.lang = "English"
 if 'menu' not in st.session_state:
     st.session_state.menu = "📊 Year Analysis"
-
-# دالة لتبديل حالة الشريط الجانبي
-def toggle_sidebar():
-    st.session_state.sidebar_visible = not st.session_state.sidebar_visible
 
 st.markdown(f"""
 <style>
@@ -51,6 +45,11 @@ footer {{visibility: hidden;}}
 header {{
     display: none !important;
     visibility: hidden !important;
+}}
+
+/* إخفاء أي أزرار في الأعلى */
+.stButton > button {{
+    display: none !important;
 }}
 
 /* تنسيق خلفية التطبيق */
@@ -77,52 +76,6 @@ header {{
     border-right: 1px solid rgba(255,255,255,0.15) !important;
     display: block !important;
     width: 21rem !important;
-}}
-
-/* تنسيق زر التحكم بالشريط الجانبي */
-.stButton > button {{
-    position: fixed !important;
-    top: 20px !important;
-    left: 20px !important;
-    z-index: 999999 !important;
-    background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%) !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 50% !important;
-    width: 50px !important;
-    height: 50px !important;
-    font-size: 24px !important;
-    cursor: pointer !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
-    border: 2px solid rgba(255,255,255,0.3) !important;
-    transition: all 0.3s ease !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 !important;
-}}
-
-.stButton > button:hover {{
-    transform: scale(1.1) !important;
-    background: linear-gradient(135deg, #2D3748 0%, #1A202C 100%) !important;
-    border-color: white !important;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.7) !important;
-}}
-
-/* تنسيق الأزرار العادية */
-.stButton > button:not(:first-of-type) {{
-    position: static !important;
-    background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%) !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 12px !important;
-    padding: 12px 24px !important;
-    font-weight: 600 !important;
-    border: 1px solid rgba(255,255,255,0.2) !important;
-    transition: all 0.3s ease !important;
-    width: auto !important;
-    height: auto !important;
-    font-size: 1rem !important;
 }}
 
 /* تنسيق صورة المطور في الشريط الجانبي */
@@ -329,12 +282,7 @@ hr {{
 </style>
 """, unsafe_allow_html=True)
 
-# ==================== زر التحكم بالشريط الجانبي ====================
-col1, col2, col3 = st.columns([1, 10, 1])
-with col1:
-    if st.button("☰", key="sidebar_toggle"):
-        toggle_sidebar()
-        st.rerun()
+# ==================== تم إزالة زر التحكم بالشريط الجانبي ====================
 
 # ==================== MAIN HEADER ====================
 st.markdown(f"""
@@ -356,43 +304,42 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ==================== SIDEBAR ====================
-if st.session_state.sidebar_visible:
-    with st.sidebar:
-        st.markdown(f"""
-        <div class="developer-profile">
-            <img src="data:image/jpeg;base64,{profile_image_base64}" class="developer-image" alt="Developer">
-            <div class="developer-name">Mohammad Naser</div>
-        </div> 
-        """, unsafe_allow_html=True)
-     
-        st.session_state.lang = st.radio("Language / اللغة", ["English", "العربية"], index=0, key="language_radio")
-        
-        st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
+with st.sidebar:
+    st.markdown(f"""
+    <div class="developer-profile">
+        <img src="data:image/jpeg;base64,{profile_image_base64}" class="developer-image" alt="Developer">
+        <div class="developer-name">Mohammad Naser</div>
+    </div> 
+    """, unsafe_allow_html=True)
+ 
+    st.session_state.lang = st.radio("Language / اللغة", ["English", "العربية"], index=0, key="language_radio")
+    
+    st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
 
-        if st.session_state.lang == "English":
-            menu_options = [
-                "📊 Year Analysis",
-                "🏢 Company Analysis",
-                "⚖️ Year Comparison",
-                "🤖 Predictions & Models",
-                "📈 Data Overview"
-            ]
-        else:
-            menu_options = [
-                "📊 تحليل السنوات",
-                "🏢 تحليل الشركات",
-                "⚖️ مقارنة السنوات",
-                "🤖 التوقعات والنماذج",
-                "📈 نظرة عامة"
-            ]
-        
-        st.session_state.menu = st.radio(
-            "Select Analysis" if st.session_state.lang == "English" else "اختر التحليل",
-            menu_options,
-            key="analysis_menu_radio"
-        )
-        
-        st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
+    if st.session_state.lang == "English":
+        menu_options = [
+            "📊 Year Analysis",
+            "🏢 Company Analysis",
+            "⚖️ Year Comparison",
+            "🤖 Predictions & Models",
+            "📈 Data Overview"
+        ]
+    else:
+        menu_options = [
+            "📊 تحليل السنوات",
+            "🏢 تحليل الشركات",
+            "⚖️ مقارنة السنوات",
+            "🤖 التوقعات والنماذج",
+            "📈 نظرة عامة"
+        ]
+    
+    st.session_state.menu = st.radio(
+        "Select Analysis" if st.session_state.lang == "English" else "اختر التحليل",
+        menu_options,
+        key="analysis_menu_radio"
+    )
+    
+    st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
 
 # ==================== DATA LOADING ====================
 @st.cache_data
@@ -400,26 +347,22 @@ def load_data():
     files = {}
     try:
         files['main'] = pd.read_csv('fortune500_cleaned.csv')
-        if st.session_state.sidebar_visible:
-            st.sidebar.success(f"✅ Main: {len(files['main']):,} rows")
+        st.sidebar.success(f"✅ Main: {len(files['main']):,} rows")
     except:
         files['main'] = pd.DataFrame()
     try:
         files['pred2024'] = pd.read_csv('fortune500_2024_predictions.csv')
-        if st.session_state.sidebar_visible:
-            st.sidebar.success(f"✅ 2024: {len(files['pred2024']):,} rows")
+        st.sidebar.success(f"✅ 2024: {len(files['pred2024']):,} rows")
     except:
         files['pred2024'] = pd.DataFrame()
     try:
         files['models'] = pd.read_csv('fortune500_models_performance.csv')
-        if st.session_state.sidebar_visible:
-            st.sidebar.success(f"✅ Models: {len(files['models'])} models")
+        st.sidebar.success(f"✅ Models: {len(files['models'])} models")
     except:
         files['models'] = pd.DataFrame()
     try:
         files['test'] = pd.read_csv('fortune500_test_predictions.csv')
-        if st.session_state.sidebar_visible:
-            st.sidebar.success(f"✅ Test: {len(files['test']):,} rows")
+        st.sidebar.success(f"✅ Test: {len(files['test']):,} rows")
     except:
         files['test'] = pd.DataFrame()
     return files
