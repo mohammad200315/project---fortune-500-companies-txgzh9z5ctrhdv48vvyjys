@@ -282,7 +282,7 @@ hr {{
 </style>
 """, unsafe_allow_html=True)
 
-# ==================== تم إزالة زر التحكم بالشريط الجانبي ====================
+
 
 # ==================== MAIN HEADER ====================
 st.markdown(f"""
@@ -295,7 +295,7 @@ st.markdown(f"""
             border: 1px solid rgba(255,255,255,0.25);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
     <h1 style="color: white; margin: 0; font-size: 3.2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-weight: 700; letter-spacing: 1px;">
-        {'Fortune 500 Analytics Dashboard' if st.session_state.lang == 'English' else 'لوحة تحليل Fortune 500'}
+        {'Fortune 500 Analytics Dashboard' if st.session_state.lang == 'English' else 'Dashboard Fortune 500'}
     </h1>
     <p style="color: rgba(255,255,255,0.95); margin-top: 15px; font-size: 1.4rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
         {'1996-2024 Analysis & Predictions' if st.session_state.lang == 'English' else 'تحليل وتوقعات 1996-2024'}
